@@ -32,7 +32,7 @@ public class FileOperationTest{
 			return;
 		}
 		
-		//players.stream().forEach(x -> System.out.println(x + "," + Arrays.asList(x.getItems()).indexOf(null)));
+		players.stream().forEach(x -> System.out.println(x + "::" + Arrays.asList(x.getItems()).indexOf(null)));
 
 		for(Player p : players){
 			String[] items = p.getItems();

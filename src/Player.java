@@ -36,10 +36,12 @@ public class Player {
 				String.valueOf(this.possetion) + "," +
 				this.weapon + "," +
 				this.armor + "," +
-				this.items[0] + "," +
-				this.items[1] + "," +
-				this.items[2] + "," +
-				this.items[3];
+				//this.items[0] + "," +
+				//this.items[1] + "," +
+				//this.items[2] + "," +
+				//this.items[3];
+				//Arrays.stream(this.items).map(item -> String.join(", ", item)) +
+				String.join(", ", items);
 	}
 	
 	//setter functions
