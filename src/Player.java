@@ -1,6 +1,8 @@
-import java.lang.invoke.MethodHandles;
-import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+
 
 public class Player {
 	private int ID;
@@ -36,12 +38,10 @@ public class Player {
 				String.valueOf(this.possetion) + "," +
 				this.weapon + "," +
 				this.armor + "," +
-				//this.items[0] + "," +
-				//this.items[1] + "," +
-				//this.items[2] + "," +
-				//this.items[3];
-				//Arrays.stream(this.items).map(item -> String.join(", ", item)) +
-				String.join(", ", items);
+				Arrays.stream(this.items)	//nullを空文字にして表示
+						.map(item -> Objects.toString(item, ""))
+						.collect(Collectors.joining(","));
+				//String.join(",", this.items);
 	}
 	
 	//setter functions
