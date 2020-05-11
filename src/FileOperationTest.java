@@ -33,21 +33,30 @@ public class FileOperationTest{
 			System.out.println(PLAYER + "が見つかりません");
 			return;
 		}
-
-		Player p = new Player(sample);
-		//System.out.println();
-		players.stream().forEach(x -> System.out.println(x + "," + x.getItems().length));
 		
+		//players.stream().forEach(x -> System.out.println(x + "," + Arrays.asList(x.getItems()).indexOf(null)));
+
+		for(Player p : players){
+			if(p.getLevel() == 1){
+				String[] items = p.getItems();
+				if(Arrays.asList(items).contains(null)){
+					items[Arrays.asList(p.getItems()).indexOf(null)] = "応援旗";
+					p.setItems(items);
+				}else{
+					p.setPossetion(p.getPossetion() + 100);
+				}
+			}
+		}
 	}
 	
 	static List<Player> load(Path FILE){
 		List<Player> players = new ArrayList<Player>();
+		
 		try(BufferedReader bw = Files.newBufferedReader(FILE)){	//CSVの読み込み
-			while((str = bw.readLine()) != null){
+			
+			while((str = bw.readLine()) != null){	//EOFまでstrに代入
 				String[] params = str.split(",");
-				//if(params.length == 11){
-					players.add(new Player(params));
-				//}
+				players.add(new Player(params));	//プレイヤー登録
 			}
 			return players;
 		}catch(IOException e){

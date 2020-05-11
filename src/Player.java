@@ -12,6 +12,7 @@ public class Player {
 	private String armor;
 	private String[] items;
 	
+	
 	public Player(String[] params){
 		this.ID = Integer.parseInt(params[0]);
 		this.name = params[1];
@@ -41,7 +42,7 @@ public class Player {
 				this.items[3];
 	}
 	
-	
+	//setter functions
 	public void setID(int ID){
 		this.ID = ID;
 	}
@@ -67,7 +68,7 @@ public class Player {
 		this.items = items;
 	}
 	
-	
+	//getter functions
 	public int getID(){
 		return this.ID;
 	}	
