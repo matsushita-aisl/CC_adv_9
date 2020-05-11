@@ -20,23 +20,24 @@ public class FileOperationTest{
 	
 	public static void main(String[] args){
 		List<Player> players;
+		
 		if(Files.exists(PLAYER)){
-			players = load(PLAYER);
+			players = load(PLAYER);	//ファイル読み込み
 		}else{
 			System.out.println(PLAYER + "が見つかりません");
 			return;
 		}
 
-		List<Player> players_new = update(players);
-		save(OUTPUT, players_new);
+		List<Player> players_new = update(players);	//書き換え処理
+		save(OUTPUT, players_new);	//ファイル書き込み
 	}
 	
-	
+	//プレイヤーステータス更新関数
 	static List<Player> update(List<Player> players){
 		for(Player p : players){
 			String[] items = p.getItems();
 			
-			if(p.getLevel() == 1){
+			if(p.getLevel() == 1){	//1レベプレイヤー用処理
 				if(Arrays.asList(items).contains(null)){
 					items[Arrays.asList(p.getItems()).indexOf(null)] = "応援旗";
 					p.setItems(items);
@@ -45,18 +46,18 @@ public class FileOperationTest{
 				}
 			}
 			
-			if(p.getLevel() <= 10){
+			if(p.getLevel() <= 10){	//10レベ以下プレイヤー用処理
 				p.setPossetion(p.getPossetion() + 100);
 			}
 			
-			if(Arrays.asList(items).contains("鋼玉")){
+			if(Arrays.asList(items).contains("鋼玉")){	//鋼玉持ちの処理
 				items[Arrays.asList(items).indexOf("鋼玉")] = "スペシャルソード";
 			}
 		}
 		return players;
 	}
 	
-	
+	//読み込み関数
 	static List<Player> load(Path FILE){
 		List<Player> players = new ArrayList<Player>();
 		String str;
@@ -74,11 +75,11 @@ public class FileOperationTest{
 		return null;
 	}
 	
-	
+	//書き込み関数
 	static void save(Path FILE, List<Player> players){
 		if(checkFile(FILE)){
-			try(BufferedWriter bw = Files.newBufferedWriter(FILE)){
-				for(Player p : players){
+			try(BufferedWriter bw = Files.newBufferedWriter(FILE)){	//ファイルを開く
+				for(Player p : players){	//書き込み
 					bw.write(p.toString() + "\n");
 				}
 				System.out.println("作業を終了します");
@@ -88,7 +89,7 @@ public class FileOperationTest{
 		}
 	}
 	
-	
+	//ファイル上書きチェック
 	static boolean checkFile(Path FILE){
 		if(Files.exists(FILE)){
 			String str;
